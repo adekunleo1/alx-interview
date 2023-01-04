@@ -11,7 +11,9 @@ Task: Write a method that determines if all the boxes can be opened.
 
 def canUnlockAll(boxes):
     """
-    Boxes is a list of lists
+    Boxes is a list of lists to check if all the boxes can be opened 
+    with the keys and returns boolean value: True if all boxes 
+    can be opened, otherwise, False
     """
     if type(boxes) is not list:
         return False
