@@ -1,28 +1,22 @@
 #!/usr/bin/python3
 
-"""
-Problem: You have n number of locked boxes in front of you.
-         Each box is numbered sequentially from 0 to n - 1
-         and each box may contain keys to the other boxes.
-Task: Write a method that determines if all the boxes can be opened.
-"""
+"""ALX Interview Lockboxes Task"""
+
 
 def canUnlockAll(boxes):
     """
-    Boxes is a list of lists to check if all the boxes can be opened 
-    with the keys and returns boolean value: True if all boxes 
-    can be opened, otherwise, False
+    A method to determine all the boxes can be opened
     """
     if type(boxes) is not list:
         return False
-    elif (len(boxes)) == 0:
+    if len(boxes) == 0:
         return False
-    for k in range(1, len(boxes) - 1):
-        boxes_checked = False
-        for idx in range(len(boxes)):
-            boxes_checked = k in boxes[idx] and k != idx
-            if boxes_checked:
+    for i in range(1, len(boxes)-1):
+        isLock = False
+        for j in range(0, len(boxes)):
+            if i in boxes[j] and j != i:
+                isLock = True
                 break
-        if boxes_checked is False:
-            return boxes_checked
+        if isLock == False:
+            return False
     return True
