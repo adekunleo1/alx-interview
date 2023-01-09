@@ -17,6 +17,6 @@ def canUnlockAll(boxes):
             if i in boxes[j] and j != i:
                 isLock = True
                 break
-        if isLock = False:
+        if isLock is False:
             return False
     return True
