@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 
-"""ALX Interview Lockboxes Task"""
+"""ALX Interview Lockboxes"""
 
 
 def canUnlockAll(boxes):
     """
-    A method to determine all the boxes can be opened
+    To determine if all the boxes can be opened
     """
     if type(boxes) is not list:
         return False
@@ -17,6 +17,6 @@ def canUnlockAll(boxes):
             if i in boxes[j] and j != i:
                 isLock = True
                 break
-        if isLock == False:
+        if isLock = False:
             return False
     return True
