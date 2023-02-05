@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-N queens puzzle
+N queens puzzle challenge
 """
 
 import sys
@@ -24,7 +24,7 @@ if n < 4:
 
 
 def solve_nqueens(n):
-    """Gets Solution for chessboard"""
+    """self explanatory"""
     if n == 0:
         return [[]]
     inner_solution = solve_nqueens(n - 1)
@@ -35,7 +35,7 @@ def solve_nqueens(n):
 
 
 def attack_queen(square, queen):
-    '''self descriptive'''
+    """self explanatory"""
     (row1, col1) = square
     (row2, col2) = queen
     return (row1 == row2) or (col1 == col2) or\
@@ -43,7 +43,7 @@ def attack_queen(square, queen):
 
 
 def safe_queen(sqr, queens):
-    '''self descriptive'''
+    """self explanatory"""
     for queen in queens:
         if attack_queen(sqr, queen):
             return False
