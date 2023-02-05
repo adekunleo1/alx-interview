@@ -1,53 +1,57 @@
 #!/usr/bin/python3
+"""
+N queens puzzle
+"""
 
 import sys
 
 
-def getinput():
-"""Returns the size of of the dashboard"""
-if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: nqueens N")
-        sys.exit(1)
-    try:
-        n = int(sys.argv[1])
-    except Exception:
-        print("N must be a number")
-        sys.exit(1)
-    if n < 4:
-        print("N must be at least 4")
-        sys.exit(1)
-    return n
+"""Returns The size of dashboard
+"""
+if len(sys.argv) != 2:
+    print('Usage: nqueens N')
+    sys.exit(1)
 
-def solve_n_queens(n):
-    def can_place(row, col):
-        # check if there's a queen in the same column
-        for i in range(row):
-            if board[i] == col or \
-               abs(board[i] - col) == abs(i - row):
-                return False
-        return True
+try:
+    n = int(sys.argv[1])
+except Exception:
+    print('N must be a number')
+    sys.exit(1)
 
-    def backtrack(row = 0, count = 0):
-        if row == n:
-            result.append(board[:])
-            return
+if n < 4:
+    print('N must be at least 4')
+    sys.exit(1)
 
-        for col in range(n):
-            if can_place(row, col):
-                board[row] = col
-                backtrack(row + 1, count + 1)
 
+def solve_nqueens(n):
+    """Gets Solution for chessboard"""
+    if n == 0:
+        return [[]]
+    inner_solution = solve_nqueens(n - 1)
+    return [solution + [(n, i + 1)]
+            for i in range(n)
+            for solution in inner_solution
+            if safe_queen((n, i + 1), solution)]
+
+
+def attack_queen(square, queen):
+    '''self descriptive'''
+    (row1, col1) = square
+    (row2, col2) = queen
+    return (row1 == row2) or (col1 == col2) or\
+        abs(row1 - row2) == abs(col1 - col2)
+
+
+def safe_queen(sqr, queens):
+    '''self descriptive'''
+    for queen in queens:
+        if attack_queen(sqr, queen):
+            return False
+    return True
+
+
+for answer in reversed(solve_nqueens(n)):
     result = []
-    board = [-1 for i in range(n)]
-    backtrack()
-    return result
-
-def print_result(result, n):
-    for solution in result:
-        for i in solution:
-            print("".join("Q" + "." * (i) + "Q" + "." * (n - i - 1)))
-        print("")
-
-    result = solve_n_queens(n)
-    print_result(result, n)
+    for p in [list(p) for p in answer]:
+        result.append([i - 1 for i in p])
+    print(result)
